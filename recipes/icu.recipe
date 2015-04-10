@@ -29,6 +29,7 @@ class Recipe(recipe.Recipe):
     files_libs = ['libicudata', 'libicui18n', 'libicuio',
                   'libicutest', 'libicutu', 'libicuuc']
     files_share = ['share/icu']
+    patches = ['icu/0001-mh-linux-Comment-out-LDFLAGSICUDT-to-avoid-linking-i.patch']
 
     def prepare(self):
         # Build directory is icu/source, not icu-53.1

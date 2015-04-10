@@ -1,0 +1,27 @@
+From 5be574d5ff69409290711b840a4c3b5438b7f108 Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Fri, 10 Apr 2015 09:06:20 +0000
+Subject: [PATCH] mh-linux: Comment out LDFLAGSICUDT to avoid linking issue
+
+See the following link:
+http://stackoverflow.com/questions/17687336/icu-49-built-on-a-debian-system-fails-to-load-libicudata-so
+---
+ config/mh-linux | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/config/mh-linux b/config/mh-linux
+index dcf2bef..b355000 100644
+--- a/config/mh-linux
++++ b/config/mh-linux
+@@ -21,7 +21,7 @@ LD_RPATH= -Wl,-zorigin,-rpath,'$$'ORIGIN
+ LD_RPATH_PRE = -Wl,-rpath,
+ 
+ ## These are the library specific LDFLAGS
+-LDFLAGSICUDT=-nodefaultlibs -nostdlib
++#LDFLAGSICUDT=-nodefaultlibs -nostdlib
+ 
+ ## Compiler switch to embed a library name
+ # The initial tab in the next line is to prevent icu-config from reading it.
+-- 
+1.9.1
+
