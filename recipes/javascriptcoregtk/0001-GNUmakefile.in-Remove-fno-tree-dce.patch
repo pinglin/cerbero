@@ -1,0 +1,27 @@
+From c7e73d51f4dd41e34c2dc3dbbd2ca419c624d43d Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Thu, 9 Apr 2015 07:27:51 +0000
+Subject: [PATCH] GNUmakefile.in: Remove -fno-tree-dce
+
+To see if we can workaround the bug:
+https://bugs.launchpad.net/gcc-linaro/+bug/1295738
+---
+ GNUmakefile.in | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/GNUmakefile.in b/GNUmakefile.in
+index 5c6d992..243d1ca 100644
+--- a/GNUmakefile.in
++++ b/GNUmakefile.in
+@@ -195,8 +195,6 @@ DIST_COMMON = $(srcdir)/Source/WTF/GNUmakefile.am \
+ 
+ # OwnPtrWin.cpp needs the symbols from gdi32 dll
+ @TARGET_WIN32_TRUE@am__append_3 = -lgdi32
+-@COMPILER_GCC_TRUE@am__append_4 = \
+-@COMPILER_GCC_TRUE@	-fno-tree-dce
+ 
+ @ENABLE_INTROSPECTION_TRUE@am__append_5 = JavaScriptCore-@WEBKITGTK_API_VERSION@.gir JavaScriptCore-@WEBKITGTK_API_VERSION@.typelib
+ @USE_GEOCLUE2_TRUE@am__append_6 = \
+-- 
+1.9.1
+

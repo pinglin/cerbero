@@ -25,6 +25,7 @@ class Recipe(recipe.Recipe):
     files_libs = ['libjavascriptcoregtk-3.0']
     files_devel = ['include/webkitgtk-3.0/JavaScriptCore',
                    'lib/pkgconfig/javascriptcoregtk-3.0.pc']
+    patches = ['javascriptcoregtk/0001-GNUmakefile.in-Remove-fno-tree-dce.patch']
 
     def prepare(self):
         self.make_install = 'make install-libjavascriptcoregtk_3_0_laHEADERS'
