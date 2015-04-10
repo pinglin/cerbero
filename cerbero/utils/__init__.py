@@ -298,4 +298,6 @@ def add_system_libs(config, new_env):
     search_paths = [os.environ['PKG_CONFIG_LIBDIR'],
         '/usr/%s/pkgconfig' % libdir, '/usr/share/pkgconfig',
         '/usr/lib/%s-linux-gnu/pkgconfig' % arch]
+    if arch == Architecture.ARMv7:
+        search_paths.append('/usr/lib/arm-linux-gnueabihf/pkgconfig')
     new_env['PKG_CONFIG_PATH'] = ':'.join(search_paths)
