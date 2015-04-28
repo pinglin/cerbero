@@ -3,9 +3,9 @@
 
 class Recipe(recipe.Recipe):
     name = 'cairo'
-    version = '1.12.18'
+    version = '1.14.2'
     stype = SourceType.TARBALL
-    url = 'http://cairographics.org/releases/cairo-1.12.18.tar.xz'
+    url = 'http://cairographics.org/releases/cairo-1.14.2.tar.xz'
     # either LGPLv2.1 or MPLv1.1
     licenses = [License.LGPLv2_1]
     autoreconf = True
@@ -38,6 +38,12 @@ class Recipe(recipe.Recipe):
     make_check = None
 
     def prepare(self):
+        # extra flags needed for gcc 4.9
+        if self.config.target_distro == Distro.ARCH:
+            self.append_env['CFLAGS'] = " -fno-lto "
+            self.append_env['CXXFLAGS'] = " -fno-lto "
+            self.append_env['CPPFLAGS'] = " -fno-lto "
+
         if self.config.variants.x11:
             self.files_devel += ['lib/pkgconfig/cairo-xlib-xrender.pc',
                                  'lib/pkgconfig/cairo-xlib.pc']
