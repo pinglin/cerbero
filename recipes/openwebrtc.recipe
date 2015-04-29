@@ -64,9 +64,10 @@ class Recipe(recipe.Recipe):
     allow_parallel_build = False
 
     files_bins = ['openwebrtc-daemon']
-    files_libs = ['libopenwebrtc', 'libopenwebrtc_bridge']
+    files_libs = ['libopenwebrtc', 'libopenwebrtc_bridge', 'libopenwebrtc_gst']
     files_devel = ['lib/pkgconfig/openwebrtc-' + _api_version + '.pc',
                    'lib/pkgconfig/openwebrtc-bridge-' + _api_version + '.pc',
+                   'lib/pkgconfig/openwebrtc-gst-' + _api_version + '.pc',
                    'include/owr']
 
     platform_files_typelibs = {
