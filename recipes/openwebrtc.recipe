@@ -39,9 +39,11 @@ class Recipe(recipe.Recipe):
     stype = SourceType.GIT
     licenses = [License.BSD_like]
     remotes = {
-        'origin': 'https://github.com/EricssonResearch/openwebrtc.git'
+        'origin': 'https://github.com/EricssonResearch/openwebrtc.git',
+        'ramax': 'https://github.com/ramaxlo/openwebrtc.git',
     }
-    commit = 'origin/master'
+    #commit = 'origin/master'
+    commit = 'ramax/master'
     autoreconf = True
     autoreconf_sh = 'mkdir -p m4 && gtkdocize && autoreconf -fiv'
     # Dependencies used in the dynamic (shared) build of OWRTC
@@ -62,9 +64,10 @@ class Recipe(recipe.Recipe):
     allow_parallel_build = False
 
     files_bins = ['openwebrtc-daemon']
-    files_libs = ['libopenwebrtc', 'libopenwebrtc_bridge']
+    files_libs = ['libopenwebrtc', 'libopenwebrtc_bridge', 'libopenwebrtc_gst']
     files_devel = ['lib/pkgconfig/openwebrtc-' + _api_version + '.pc',
                    'lib/pkgconfig/openwebrtc-bridge-' + _api_version + '.pc',
+                   'lib/pkgconfig/openwebrtc-gst-' + _api_version + '.pc',
                    'include/owr']
 
     platform_files_typelibs = {
@@ -141,7 +144,7 @@ class Recipe(recipe.Recipe):
             ]
         elif self.config.target_platform in (Platform.DARWIN, Platform.LINUX):
             self.configure_options += ' --disable-gtk-doc --disable-static \
-                --disable-owr-static --enable-shared --enable-tests'
+                --disable-owr-static --enable-shared --enable-tests --enable-owr-gst=yes'
             if self.config.target_platform == Platform.LINUX:
                 # Use system libraries for libpulse, libv4l2, and gtk-doc
                 self.use_system_libs = True

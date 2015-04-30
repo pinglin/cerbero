@@ -29,6 +29,8 @@ class Recipe(recipe.Recipe):
              'lib/gstreamer-1.0/libgstvideoscale%(mext)s',
              'lib/gstreamer-1.0/libgstvideotestsrc%(mext)s',
              'lib/gstreamer-1.0/libgstvolume%(mext)s',
+             'lib/gstreamer-1.0/libgstplayback%(mext)s',
+             'lib/gstreamer-1.0/libgstencodebin%(mext)s',
     ]
 
     files_plugins_devel = [
