@@ -59,8 +59,10 @@ def determine_num_of_cpus():
 
     # Python 2.6+
     try:
-        import multiprocessing
-        return multiprocessing.cpu_count()
+        #import multiprocessing
+        #return multiprocessing.cpu_count()
+	import os
+	return os.sysconf('SC_NPROCESSORS_CONF')
     except (ImportError, NotImplementedError):
         return 1
 
