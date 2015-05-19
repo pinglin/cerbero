@@ -43,7 +43,8 @@ class Recipe(recipe.Recipe):
         'ramax': 'https://github.com/ramaxlo/openwebrtc.git',
     }
     #commit = 'origin/master'
-    commit = 'ramax/master'
+    #commit = 'ramax/master'
+    commit = 'ramax/fix-interapp-overhead'
     autoreconf = True
     autoreconf_sh = 'mkdir -p m4 && gtkdocize && autoreconf -fiv'
     # Dependencies used in the dynamic (shared) build of OWRTC
