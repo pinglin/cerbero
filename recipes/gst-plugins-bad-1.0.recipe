@@ -22,8 +22,12 @@ class Recipe(recipe.Recipe):
     # Explicitly enable plugins
     configure_options += ' --enable-openh264 --enable-opus \
         --enable-srtp'
-    #commit = '925b65b02ed43f79a397d97e3664b8dc8d7be2a8'
-    commit = 'origin/master'
+    remotes = {
+        'origin': 'git://anongit.freedesktop.org/gstreamer/gst-plugins-bad',
+        'ramax': 'https://github.com/ramaxlo/gst-plugins-bad.git',
+    }
+    #commit = 'dec8139e65d8860ee0450abd58d6a8da56a675d7'
+    commit = 'ramax/master'
     deps = ['gstreamer-1.0', 'gst-plugins-base-1.0', 'zlib', 'openh264', 'opus',
             'libsrtp', 'openssl']
     use_system_libs = True
@@ -111,10 +115,6 @@ class Recipe(recipe.Recipe):
         ]
 
     def prepare(self):
-        #self.remotes['origin'] = ('%s/%s' % ('git://anongit.freedesktop.org/gstreamer', 'gst-plugins-bad'))
-        self.remotes['origin'] = ('%s' % 'https://github.com/ramaxlo/gst-plugins-bad.git')
-        self.remotes['upstream'] = self.remotes['origin']
-
         self.append_env['CFLAGS'] = " -Wno-error -DGSTREAMER_GLIB_COCOA_NSAPPLICATION=1 "
         self.append_env['OBJCFLAGS'] = " -Wno-error -DGSTREAMER_GLIB_COCOA_NSAPPLICATION=1 "
         self.append_env['CXXFLAGS'] = " -Wno-error "
@@ -123,6 +123,3 @@ class Recipe(recipe.Recipe):
             self.configure_options += '--disable-gtk-doc '
         if self.config.variants.nodebug:
             self.append_env['CFLAGS'] += ' -DGST_LEVEL_MAX=GST_LEVEL_FIXME'
-
-        if self.config.target_distro_version in [DistroVersion.DEBIAN_SQUEEZE, DistroVersion.DEBIAN_WHEEZY]:
-            self.platform_files_plugins_capture[Platform.LINUX].remove('lib/gstreamer-1.0/libgstdvb%(mext)s')

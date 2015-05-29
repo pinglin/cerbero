@@ -32,7 +32,7 @@ CONFIG_EXT = 'cbc'
 DEFAULT_HOME = os.path.expanduser('~/cerbero')
 DEFAULT_CONFIG_FILENAME = 'cerbero.%s' % CONFIG_EXT
 DEFAULT_CONFIG_FILE = os.path.join(CONFIG_DIR, DEFAULT_CONFIG_FILENAME)
-DEFAULT_GIT_ROOT = 'git://anongit.freedesktop.org/gstreamer-sdk'
+DEFAULT_GIT_ROOT = 'git://anongit.freedesktop.org/gstreamer'
 DEFAULT_ALLOW_PARALLEL_BUILD = True
 DEFAULT_PACKAGER = "Default <default@change.me>"
 CERBERO_UNINSTALLED = 'CERBERO_UNINSTALLED'
@@ -423,6 +423,10 @@ class Config (object):
 
     def _load_cmd_config(self, filename):
         if filename is not None:
+
+            if not os.path.exists(filename):
+                filename = os.path.join(CONFIG_DIR, filename + "." + CONFIG_EXT)
+
             if os.path.exists(filename):
                 self._parse(filename, reset=False)
                 self.filename = DEFAULT_CONFIG_FILE
